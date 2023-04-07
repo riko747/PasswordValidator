@@ -10,6 +10,7 @@ namespace PasswordValidator
         private const string PasswordValidString = "Password Is Valid";
         private const string PasswordInvalidString = "Password Is Invalid";
         private const string StringIsInInvalidFormat = "String Is In Invalid Format";
+        private const string FileIsEmpty = "File is empty. Press any key and try again.";
         private const char LineSeparator = ' ';
         private static readonly char[] SymbolsCountSeparators = { '-', ':' };
 
@@ -44,6 +45,12 @@ namespace PasswordValidator
         {
             var lines = ReadFile(fileName).ToList();
 
+            if (!lines.Any())
+            {
+                Console.WriteLine(FileIsEmpty);
+                Console.ReadKey();
+                return;
+            }
             foreach (var line in lines)
             {
                 var validResult = ParseData(line);
