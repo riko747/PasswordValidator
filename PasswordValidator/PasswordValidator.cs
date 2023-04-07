@@ -7,9 +7,9 @@ namespace PasswordValidator
 {
     internal class PasswordValidator
     {
-        private const string PasswordValidString = "Password Is Valid";
-        private const string PasswordInvalidString = "Password Is Invalid";
-        private const string StringIsInInvalidFormat = "String Is In Invalid Format";
+        private const string PasswordValidString = "Password Is Valid.";
+        private const string PasswordInvalidString = "Password Is Invalid.";
+        private const string StringIsInInvalidFormat = "String Is In Invalid Format.";
         private const string FileIsEmpty = "File is empty. Press any key and try again.";
         private const char LineSeparator = ' ';
         private static readonly char[] SymbolsCountSeparators = { '-', ':' };
@@ -43,6 +43,7 @@ namespace PasswordValidator
 
         private void CheckForValidPassword(string fileName)
         {
+            var numberOfValidPasswords = 0;
             var lines = ReadFile(fileName).ToList();
 
             if (!lines.Any())
@@ -59,9 +60,15 @@ namespace PasswordValidator
 
                 Console.ForegroundColor = validResult == PasswordValidString ? ConsoleColor.Green : ConsoleColor.Red;
 
+                if (validResult == PasswordValidString) numberOfValidPasswords++;
+                
                 Console.WriteLine(validResult);
                 Console.ResetColor();
             }
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Number of valid passwords is " + numberOfValidPasswords);
+            Console.ResetColor();
             Console.ReadLine();
         }
 
