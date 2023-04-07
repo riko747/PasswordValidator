@@ -62,6 +62,7 @@ namespace PasswordValidator
                 Console.WriteLine(validResult);
                 Console.ResetColor();
             }
+            Console.ReadLine();
         }
 
         private static string ParseData(string line)
